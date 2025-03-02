@@ -1,44 +1,30 @@
 package com.tql.backend.controller;
 
-import com.tql.backend.dto.request.UserCreateRequest;
-import com.tql.backend.dto.request.UserUpdateRequest;
-import com.tql.backend.service.UserService;
+import com.tql.backend.repository.UserRepository;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/api/users")
 @RequiredArgsConstructor
-@FieldDefaults(makeFinal = true, level = AccessLevel.PRIVATE)
-@CrossOrigin(origins = "*")
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class UserController {
-    UserService userService;
+    UserRepository userRepository;
 
-    @PostMapping
-    public ResponseEntity<?> createUser(@RequestBody UserCreateRequest request) {
-        return userService.createUser(request);
-    }
-
-    @PutMapping(value = "/{id}")
-    public ResponseEntity<?> updateUser(@PathVariable String id, @RequestBody UserUpdateRequest request) {
-        return userService.updateUser(id, request);
-    }
-
-    @GetMapping("/get-user/{username}")
-    public ResponseEntity<?> getUserByUsername(@PathVariable String username) {
-        return userService.getUserByUsername(username);
-    }
-    @DeleteMapping("/delete-user/{username}")
-    public ResponseEntity<?> deleteUser(@PathVariable String username) {
-        userService.deleteUser(username);
-        return ResponseEntity.ok("User deleted successfully");
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getUserById(@PathVariable Long id) {
+        var user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("Khong tim thay user"));
+        return ResponseEntity.ok(user);
     }
 
     @GetMapping("/get-all-users")
     public ResponseEntity<?> getAllUsers() {
-        return userService.getAllUsers();
+        return ResponseEntity.ok(userRepository.findAll());
     }
 }

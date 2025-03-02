@@ -12,3 +12,14 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: none
+#  security:
+#    user:
+#      name: web
+#      password: edit
+web-edit.app.jwtSecret: cd83f75926ee098226457f5f7d0bd1a2e8d6368b7b373a0c9725292af8db588014e097f3980db6051bb0be33bffcd45efc92f32bcc7773c9a8730bfeea5c3b90cc612834df3117f1fa3ed85388cc57bd26d49fea90ca5acc9fd531090edf68b766ddd4fcba3705e297561a1330e372cf6580dd0823cd45443c41e0cfdf1033e90dca06e1b6bc9029a835227be704d7cda557c366762ecbba790d2af5fc0e1f9583a34391a24fb782912b4583ac05bf54edce75129b0dff623fda859cbb5b79aecc64fa2c249611f860bd8bd52978fa4409c643407e1bc8a3fa1ac029026e7653ba7353dd50063e591620a8f9111539fc52a392d48384a8571453ee4f545c4a96
+web-edit.app.jwtExpirationMs: 8640000
+
+cloudinary:
+  cloud_name: drdm6tmo0
+  api_key: 172245399567784
+  api_secret: pYxqqlvB0Ns0Mr68-DKg6LWorfg
